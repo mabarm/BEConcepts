@@ -1,2 +1,2 @@
 # BEConcepts
-Documenting concepts related BE while learning
+Documenting concepts related to backend while learning
