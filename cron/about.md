@@ -6,7 +6,9 @@
 # How It Works:
 
 - Cron is the system tool that handles the scheduling.
+  It's a background service that checks the cron jobs defined in a file called the crontab and runs them at the scheduled times.
 - Crontab (short for "cron table") is the file where you define your tasks and the schedule.
+  This is the file where cron jobs are listed. Each job is defined by a cron expression, which specifies when the job should run, and the command or script to execute.
 
 # Example Use Cases:
 
