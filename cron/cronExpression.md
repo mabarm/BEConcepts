@@ -36,3 +36,61 @@ A cron expression is made up of five fields, each representing a time value, fol
    crontab -r
 
 <br />
+
+# Explanation of `/` in Cron Expressions
+
+## Basic Function
+
+The `/` operator indicates a step value. It is commonly used in conjunction with a range or the `*` wildcard. The syntax is typically written as `*/n`, where `n` is the interval.
+
+#### Cron Expression: `*/5 * * * * /path/to/script.sh`
+
+- **Meaning**: Run the script every 5 minutes, regardless of the hour.
+- **Execution Times**:
+  - 0:00, 0:05, 0:10, 0:15, ..., 0:55 (for every hour)
+
+---
+
+#### Cron Expression: `0 */2 * * * /path/to/job.sh`
+
+- **Meaning**: Run the job every 2 hours.
+- **Execution Times**:
+  - 0:00, 2:00, 4:00, 6:00, 8:00, 10:00, 12:00, 14:00, 16:00, 18:00, 20:00, 22:00 (within a 24-hour period)
+
+---
+
+#### Cron Expression: `0 0 1 * * /path/to/monthly-job.sh`
+
+- **Meaning**: Run the job on the **1st day of every month at 12:00 AM (midnight)**.
+- **Execution Times**:
+  - This job will run once a month at **12:00 AM** on the **1st**.
+
+## Example Breakdown
+
+- **`30 8 * * 1 /path/to/backup.sh`**:
+
+  - This expression does not use `/` but specifies that the job runs at **8:30 AM** every **Monday**. The fields are:
+    - **30**: 30 minutes past the hour.
+    - **8**: The 8th hour (8 AM).
+    - **`*`**: Every day of the month.
+    - **`*`**: Every month.
+    - **1**: Monday (the 1st day of the week).
+
+- **`0 */2 * * * /path/to/job.sh`**:
+  - In this case, `0` indicates the job runs at the top of the hour (0 minutes). The `*/2` indicates the job will run every 2 hours. So, it will execute at:
+    - 0:00 (midnight)
+    - 2:00 AM
+    - 4:00 AM
+    - 6:00 AM
+    - 8:00 AM
+    - 10:00 AM
+    - 12:00 PM
+    - 2:00 PM
+    - 4:00 PM
+    - 6:00 PM
+    - 8:00 PM
+    - 10:00 PM
+
+## Summary
+
+The `/` operator in a cron expression is essential for defining intervals or steps for when a job should run, providing flexibility in scheduling tasks at regular intervals. It is especially useful for creating repetitive schedules, such as running jobs every few minutes, hours, or days.
