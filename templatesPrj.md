@@ -117,7 +117,7 @@ Real-World Applicability: Many of these projects mimic real-world applications u
 
 Scalability: You can start with a simple version of each project and expand it by adding features like user roles, security, and more.
 
-# Key Concepts You’ll Learn
+# Key Concepts will Learn
 
 RESTful APIs: Building APIs to serve data to the frontend or external services.
 Database Interaction: Designing schemas, performing CRUD operations, and handling relationships in SQL or NoSQL databases.
