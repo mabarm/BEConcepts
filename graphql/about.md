@@ -11,3 +11,5 @@
 4. **Real-Time Data (Subscriptions)**: GraphQL supports subscriptions, which allow you to receive real-time updates when the data changes (e.g., live chat or notifications).
 
 5. **Combines Queries**: With GraphQL, you can combine multiple related queries into a single request. For instance, you can fetch both user data and their related posts in one query.
+
+6. **Version-Free**: Since clients can specify exactly the fields they need, there's no need for versioning the API as it evolves.
