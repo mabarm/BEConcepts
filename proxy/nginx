@@ -1,0 +1,9 @@
+NGINX is a powerful, open-source web server and reverse proxy server often used for load balancing, caching, and handling high-traffic websites. It’s known for its high performance, stability, and low resource consumption. Here’s an overview of NGINX and a quick guide to getting started with common configurations:
+
+#Key NGINX Features:
+
+Web Server: Serve static content efficiently with low memory usage.
+Reverse Proxy: Distribute incoming requests to different backend servers.
+Load Balancing: Distribute traffic across multiple servers to balance the load.
+Caching: Cache responses to reduce server load and improve performance.
+Security: Set up SSL/TLS, control access, and apply security headers.
