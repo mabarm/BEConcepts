@@ -85,3 +85,12 @@ const resolvers = {
     },
 };
 ```
+
+## 6. Subscriptions (for Real-Time Data)
+Subscriptions allow clients to receive real-time updates when data changes.
+Ex
+```
+type Subscription {
+    bookAdded: Book
+}
+```
