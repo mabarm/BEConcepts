@@ -1,0 +1,87 @@
+# GraphQL Basics
+
+GraphQL is a query language and runtime that allows clients to request only the specific data they need, making data fetching more efficient compared to traditional REST APIs.
+
+## 1. Core Concepts
+
+- **Schema**: Defines the structure of data and the relationships between different types. It’s the backbone of GraphQL and dictates what data clients can request.
+- **Types**: GraphQL uses a strongly-typed schema where each piece of data has a specific type (e.g., `String`, `Int`, `Boolean`). Custom types can also be created.
+- **Queries and Mutations**:
+  - **Query**: Used to *fetch* data.
+  - **Mutation**: Used to *modify* data (create, update, delete).
+- **Resolvers**: Functions that “resolve” the data for each field in a query. They fetch the required data from a database, API, or other sources.
+
+## 2. Schema Definition Language (SDL)
+
+GraphQL schemas are often written using SDL (Schema Definition Language), which defines the types and structure of data.
+Ex:
+```
+type Book {
+    id: ID!
+    title: String!
+    author: Author!
+}
+
+type Author {
+    id: ID!
+    name: String!
+    books: [Book!]!
+}
+
+type Query {
+    books: [Book]
+    book(id: ID!): Book
+    authors: [Author]
+}
+
+type Mutation {
+    addBook(title: String!, authorId: ID!): Book
+}
+```
+
+## 3. Queries
+
+Queries are used to fetch data. In a single request, clients can specify exactly which fields they need, improving efficiency.
+Ex:
+```
+query {
+    book(id: "1") {
+        title
+        author {
+            name
+        }
+    }
+}
+```
+
+## 4. Mutations
+
+Mutations handle data modification actions such as creating, updating, or deleting data.
+Ex:
+```
+mutation {
+    addBook(title: "GraphQL Guide", authorId: "2") {
+        id
+        title
+    }
+}
+```
+
+## 5. Resolvers
+
+Resolvers are functions that define how to retrieve data for each field.
+Ex:
+```
+const resolvers = {
+    Query: {
+        books: () => getAllBooks(),
+        book: (parent, args) => getBookById(args.id),
+    },
+    Mutation: {
+        addBook: (parent, args) => createBook(args),
+    },
+    Author: {
+        books: (author) => getBooksByAuthor(author.id),
+    },
+};
+```
