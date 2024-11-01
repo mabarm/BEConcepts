@@ -1,0 +1,96 @@
+#variables
+In GraphQL, variables are used to make queries and mutations more dynamic and reusable by allowing you to pass in different values without altering the query or mutation structure itself. They are especially helpful when dealing with parameters that might change frequently, such as user inputs or dynamic filters.
+
+1. Defining Variables in the Query
+To use variables in a GraphQL query, you declare them in two main areas:
+
+In the query signature: Just after the operation name, you define the variables with their types.
+In the query body: Use the variable prefixed by $ where you want to substitute a value.
+
+Example Query with Variables
+Here’s a simple example of a query with a variable:
+
+```
+query GetUser($userId: ID!) {
+  user(id: $userId) {
+    id
+    name
+    email
+  }
+}
+```
+In this example:
+$userId is the variable, declared with the type ID!, meaning it’s a required ID (indicated by the !).
+The variable $userId is then used as the argument for the user field.
+
+2. Providing Variables in the Query Execution
+Variables are provided as JSON in a separate dictionary when the query is executed. Here’s how you might call this query with variables in JSON format:
+
+```
+{
+  "userId": "12345"
+}
+```
+
+3. Using Variables in Mutations
+Variables in mutations work similarly to queries. Here’s an example:
+
+```
+mutation CreateUser($name: String!, $email: String!) {
+  createUser(name: $name, email: $email) {
+    id
+    name
+    email
+  }
+}
+```
+And provide the variables:
+
+```
+{
+  "name": "Jane Doe",
+  "email": "jane@example.com"
+}
+```
+
+4. Variable Types
+Each variable needs a specific type, just like any GraphQL field. Some common types include:
+
+- Scalars: Int, Float, String, Boolean, ID.
+- Custom Input Types: You can also use custom input types if defined in your schema.
+- Non-nullable types: Indicated with !, meaning the variable is required (e.g., String!).
+- Lists: To pass in arrays, you can define types as lists, like [String!].
+
+
+## Example with Lists and Custom Types
+Suppose you want to filter a list of products by categories and a price range. You might create a custom PriceRange input type:
+
+# Define a custom input type in the schema
+input PriceRange {
+  min: Float
+  max: Float
+}
+Then you can use this input type in a query or mutation with variables:
+
+```
+query GetProducts($categories: [String!], $priceRange: PriceRange) {
+  products(categories: $categories, priceRange: $priceRange) {
+    id
+    name
+    price
+  }
+}
+```
+Variables JSON:
+
+```
+{
+  "categories": ["electronics", "books"],
+  "priceRange": { "min": 10.0, "max": 100.0 }
+}
+```
+
+##Benefits of Using Variables
+- Reusability: Write a query or mutation once and reuse it with different variables.
+- Readability: Keeps the structure clean by separating data and query structure.
+- Security: Reduces risk of injection attacks by using variables rather than embedding values in the query.
